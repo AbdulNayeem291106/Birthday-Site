@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Parveen Phupjaan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* SAME STYLES AS BEFORE (SHORTENED FOR CLEAN VIEW) */
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+html,body{
+height:100%;
+overflow:hidden;
+background:url('bg.jpg') center/cover no-repeat fixed;
+color:white;
+}
+
+body::before{
+content:"";
+position:absolute;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.35);
+z-index:-1;
+}
+
+.container{
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:600px;
+background:rgba(0,0,0,0.5);
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+input{
+width:90%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:#ff5f9e;
+color:white;
+}
+
+.hidden{display:none;}
+
+.letter{
+text-align:left;
+font-size:18px;
+line-height:1.8;
+white-space:pre-line;
+}
+
+.final{text-align:center;}
+
+.final img{
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Happy Birthday Parveen Phupjaan ❤️</h1>
+
+<!-- NAME -->
+<div id="nameSection">
+
+<h2>Enter Name</h2>
+<input id="nameInput" placeholder="Name">
+<button onclick="checkName()">Next</button>
+
+</div>
+
+<!-- DOB (ONLY DATE + MONTH) -->
+<div id="dobSection" class="hidden">
+
+<h2>Enter Date & Month</h2>
+
+<input type="date" id="dobInput">
+
+<button onclick="checkDob()">Continue 💌</button>
+
+</div>
+
+<!-- LETTER -->
+<div id="letterSection" class="hidden">
+
+<p id="letterText" class="letter"></p>
+
+</div>
+
+<!-- FINAL -->
+<div id="finalSection" class="hidden">
+
+<div class="final">
+
+<h2>🎉 Happy Birthday 🎉</h2>
+
+<img src="photo1.jpg">
+
+<p>Wishing you happiness & love ❤️</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<audio id="music" preload="auto">
+<source src="letter.mp3">
+</audio>
+
+<script>
+
+const correctName = "Parveen";
+
+/* Only DATE + MONTH (DD-MM) */
+const correctDayMonth = "09-05";
+
+let i = 0;
+
+const letter = `Pyari Parveen Phupjaan ❤️
+
+Aapko janamdin ke mubarak ho.
+
+Aapki mohabbat, dekhbhaal aur pyar hamesha hamari zindagi ko khushiyon se bhara dete hain. Aap har waqt hamare liye ek sahara, ek dua aur ek pyari muskurahat bankar rehti hain.
+
+Sabse khaas baat yeh hai ki aap mere saath ek chhote bachchi ki tarah khelti hain aur hamesha khushi ka mahaul bana deti hain. Sirf mere hi mere hi Sarah nahi, mere cousins ke saatth bhi. Aapke saath guzara hua har pal hamesha yaadgaar aur pyara lagta hai.
+
+Aap sirf hamari Phupjaan nahi, balki hamare dil ki sabse khaas aur izzatdaar shakhsiyat hain. Aapne hamesha har mushkil waqt mein hamara saath diya aur humein pyar aur apnapan diya.
+
+Allah aapko hamesha sehat, khushiyan, sukoon aur lambi zindagi ata farmaye. Aapki zindagi hamesha muskurahaton aur barkaton se bhari rahe.
+
+Ham sab ki taraf se aapko bahut saara pyar aur duaein ❤️
+
+Thank you for always caring for us.
+
+Happy Birthday Parveen Phupjaan 🎂✨`;
+
+/* NAME */
+function checkName(){
+let name=document.getElementById("nameInput").value.trim();
+if(name===correctName){
+document.getElementById("nameSection").classList.add("hidden");
+document.getElementById("dobSection").classList.remove("hidden");
+}
+}
+
+/* DOB CHECK (IGNORE YEAR) */
+function checkDob(){
+
+let fullDate=document.getElementById("dobInput").value;
+
+if(!fullDate){
+alert("Select Date");
+return;
+}
+
+/* Extract DD-MM only */
+let parts = fullDate.split("-");
+let dayMonth = parts[2] + "-" + parts[1];
+
+if(dayMonth === correctDayMonth){
+
+document.getElementById("dobSection").classList.add("hidden");
+document.getElementById("letterSection").classList.remove("hidden");
+
+document.getElementById("music").play();
+
+typeLetter();
+
+}else{
+alert("Incorrect Date");
+}
+
+}
+
+/* LETTER */
+function typeLetter(){
+
+if(i<letter.length){
+document.getElementById("letterText").innerHTML+=letter.charAt(i);
+i++;
+setTimeout(typeLetter,40);
+}
+else{
+setTimeout(showFinal,1200);
+}
+
+}
+
+/* FINAL */
+function showFinal(){
+document.getElementById("letterSection").classList.add("hidden");
+document.getElementById("finalSection").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
